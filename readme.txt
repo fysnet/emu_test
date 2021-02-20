@@ -22,7 +22,7 @@ Here is an example output of a single ADD instruction:
 
 00023: 0000FFFF 00008000 00008101 00008202 00000000 00000000 00000000 00000084
 
-This tells me that it is the 24rd test (line 0023, zero based), prints the
+This tells me that it is the 24th test (line 0023, zero based), prints the
 register contents *after* the execution of the instruction, in the following
 order:  EAX EBX ECX EDX ESI EDI EBP EFLAGS
 
