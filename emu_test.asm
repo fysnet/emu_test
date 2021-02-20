@@ -466,9 +466,6 @@ start_tests:
            ; xlat
            call  test_xlat
 
-           ;  TODO: update nbasm proper....
-
-
            mov  si,offset DoneStr
            call display_string
            
