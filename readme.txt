@@ -79,7 +79,7 @@ Also, please note that if you have the test and emulator each set for 80x186
 instructions above the 80x186.  Hence, use the ROM option.
 
 * To build the images
-The images are build using the NBASM assembler found at:
+The images are built using the NBASM assembler found at:
             http://www.fysnet/newbasic.htm
                  NBASM ver 00.26.77
 
@@ -147,7 +147,7 @@ If you wish to use the ROM version, use the following:
 which will boot directly to the ROM image.
 
 Please note, that if you use the FLOPPY option, you can see the results on the
-BOCHS montitor window.  To get them to a file, simple redirect.
+BOCHS montitor window.  To get them to a file, simply redirect.
 
   bochs > bochs0.txt
 
@@ -159,7 +159,8 @@ file will have 'Done.' as the last line.
 Of course, you are more than welcome to improve each and any instruction.
 Simply do so, then send me your results and I will post them here.
 
-Here is an example source file, which prints the results for the CLC instruction:
+Here is an example source file, which prints the results for the CLC, STC,
+and CMC instructions:
 
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 ; This routine 'tests' the clc/stc/cmc instructions
