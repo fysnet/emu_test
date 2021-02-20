@@ -29,6 +29,8 @@ order:  EAX EBX ECX EDX ESI EDI EBP EFLAGS
 Only the relative flags for this instruction are displayed.  All undefined
 and unrelated flags are masked off.
 
+Please see the bochs.txt file for an example output when ran under BOCHS.
+
 If I take this 'test' to another emulator, it should produce the same line
 for the same instruction.  If it does not, one (or both) of the emulators is 
 in error.
@@ -157,5 +159,70 @@ file will have 'Done.' as the last line.
 Of course, you are more than welcome to improve each and any instruction.
 Simply do so, then send me your results and I will post them here.
 
-Thank you,
+Here is an example source file, which prints the results for the CLC instruction:
+
+; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+; This routine 'tests' the clc/stc/cmc instructions
+; On entry:
+;       nothing
+; On return:
+;       nothing
+test_clc   proc near
+
+           ; these two lines simply print the instruction we are currently 'testing'.
+           mov  si,offset TestClcStr
+           call display_string
+
+           ; clear the registers:
+           ;  this clears all the registers used, so that
+           ;   we have a known state before we execute the
+           ;   instruction.
+           call reset_all
+           
+           ; since each emulator (processor) can and will have different
+           ; values for the undefined flags of an instruction, we specify
+           ; these undefined flags here so that they are masked off when
+           ; the results are printed.
+           ; for example, if the instruction had the CARRY flag as undefined,
+           ; we would use the following line:
+           ;  mov  word UNDEFINED_FLAGS,(~(FLAGS_CARRY))
+           ; how about the Zero & Parity flags as undefined?
+           ;  mov  word UNDEFINED_FLAGS,(~(FLAGS_ZERO | FLAGS_PARITY))
+           ; if we want to print all associated flags, simply use 0xFFFF
+           ; like we do here.
+           mov  word UNDEFINED_FLAGS,0xFFFF   ; all other flags are not affected
+           
+           xor  ax,ax   ; set the flags to a known state (Carry = 0, Parity = Even, Aux = 0, Zero = 1, OF = 0)
+           stc          ; set the carry (hard code it here)
+           clc          ; clear it
+           call std_out ; now print the results, in this case, only the FLAGS field is modified.
+
+           xor  ax,ax   ; set the flags in a known state (Carry = 0, Parity = Even, Aux = 0, Zero = 1, OF = 0)
+           stc          ; set it,
+           call std_out ;  printing the results again.
+
+           xor  ax,ax   ; set the flags in a known state (Carry = 0, Parity = Even, Aux = 0, Zero = 1, OF = 0)
+           cmc          ; compliment it,
+           call std_out ;  printing the results one more time.
+
+           ret
+test_clc   endp
+
+TestClcStr db 'Test: CLC/STC/CMC',13,10,0
+
+.end
+
+Each instruction can have its own file as the one above and have as many or
+as few 'tests' as you wish.  No need to modify any other file, except add
+the file and the 'call' to the emu_test.asm file.
+
+Again, to be accurate, this code does not actually test the instruction for
+accuracy.  It simply executes the instruction and prints the state of the
+machine so that it can be compared to another emulator.
+
+In fact, if something was added to the CHAR_OUT.INC file, such as a serial_out
+routine, this could actually be ran on real hardware, as long as you were
+able to 'catch' the serial stream on another machine.  However, currently 
+this is coded for emulators, not real hardware.
+
 Ben
