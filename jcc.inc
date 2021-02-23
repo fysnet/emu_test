@@ -11,7 +11,7 @@ comment |*******************************************************************
 *                 http://www.fysnet/newbasic.htm                           *
 *               NBASM ver 00.26.77                                         *
 *                                                                          *
-* Last Updated: 19 Feb 2021                                                *
+* Last Updated: 22 Feb 2021                                                *
 *                                                                          *
 *                                                                          *
 ***************************************************************************|
@@ -34,7 +34,7 @@ test_jcc   proc near
            mov  dx,1234h   ; 
            mov  bx,0001h   ; or'ing bit
            mov  cx,5555h   ; so we can test the jcxz instruction
-           xor  ax,ax      ; set the flags in a known state (Carry = 0, Parity = Even, Aux = 0, Zero = 1, OF = 0)
+           xor  ax,ax      ; set the flags in a known state (Carry = 0, Parity = Even, Aux = ?, Zero = 1, OF = 0)
            jc   short @f
            jpo  short @f
            jnz  short @f

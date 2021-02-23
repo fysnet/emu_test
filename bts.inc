@@ -11,7 +11,7 @@ comment |*******************************************************************
 *                 http://www.fysnet/newbasic.htm                           *
 *               NBASM ver 00.26.77                                         *
 *                                                                          *
-* Last Updated: 19 Feb 2021                                                *
+* Last Updated: 22 Feb 2021                                                *
 *                                                                          *
 *                                                                          *
 ***************************************************************************|
@@ -33,7 +33,7 @@ test_bts   proc near
            call reset_all
            mov  word UNDEFINED_FLAGS,(~(FLAGS_OVERFLOW | FLAGS_SIGN | FLAGS_ZERO | FLAGS_AUXILIARY | FLAGS_PARITY))
 
-           xor  ax,ax   ; set the flags in a known state (Carry = 0, Parity = Even, Aux = 0, Zero = 1, OF = 0)
+           xor  ax,ax   ; set the flags in a known state (Carry = 0, Parity = Even, Aux = ?, Zero = 1, OF = 0)
 
            mov  ax,0A5A5h
            bts  ax,ax

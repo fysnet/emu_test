@@ -11,7 +11,7 @@ comment |*******************************************************************
 *                 http://www.fysnet/newbasic.htm                           *
 *               NBASM ver 00.26.77                                         *
 *                                                                          *
-* Last Updated: 19 Feb 2021                                                *
+* Last Updated: 22 Feb 2021                                                *
 *                                                                          *
 *                                                                          *
 ***************************************************************************|
@@ -31,7 +31,7 @@ test_scas  proc near
            call reset_all
            mov  word UNDEFINED_FLAGS,0xFFFF
 
-           xor  ax,ax   ; set the flags in a known state (Carry = 0, Parity = Even, Aux = 0, Zero = 1, OF = 0)
+           xor  ax,ax   ; set the flags in a known state (Carry = 0, Parity = Even, Aux = ?, Zero = 1, OF = 0)
            mov  al,'A'
            mov  di,offset sbuffer0
            mov  cx,26
@@ -39,7 +39,7 @@ test_scas  proc near
              scasb
            call std_out
            
-           xor  ax,ax   ; set the flags in a known state (Carry = 0, Parity = Even, Aux = 0, Zero = 1, OF = 0)
+           xor  ax,ax   ; set the flags in a known state (Carry = 0, Parity = Even, Aux = ?, Zero = 1, OF = 0)
            mov  ax,'A'
            mov  di,offset sbuffer1
            mov  cx,26
@@ -48,7 +48,7 @@ test_scas  proc near
            call std_out
 
 .if (HIGHEST_CPU == 3)
-           xor  ax,ax   ; set the flags in a known state (Carry = 0, Parity = Even, Aux = 0, Zero = 1, OF = 0)
+           xor  ax,ax   ; set the flags in a known state (Carry = 0, Parity = Even, Aux = ?, Zero = 1, OF = 0)
            mov  eax,'A'
            mov  di,offset sbuffer2
            mov  cx,26
@@ -58,7 +58,7 @@ test_scas  proc near
 .endif
 
 
-           xor  ax,ax   ; set the flags in a known state (Carry = 0, Parity = Even, Aux = 0, Zero = 1, OF = 0)
+           xor  ax,ax   ; set the flags in a known state (Carry = 0, Parity = Even, Aux = ?, Zero = 1, OF = 0)
            mov  al,'Q'
            mov  di,offset sbuffer3
            mov  cx,26
@@ -66,7 +66,7 @@ test_scas  proc near
              scasb
            call std_out
            
-           xor  ax,ax   ; set the flags in a known state (Carry = 0, Parity = Even, Aux = 0, Zero = 1, OF = 0)
+           xor  ax,ax   ; set the flags in a known state (Carry = 0, Parity = Even, Aux = ?, Zero = 1, OF = 0)
            mov  ax,'J'
            mov  di,offset sbuffer4
            mov  cx,26
@@ -75,7 +75,7 @@ test_scas  proc near
            call std_out
 
 .if (HIGHEST_CPU == 3)
-           xor  ax,ax   ; set the flags in a known state (Carry = 0, Parity = Even, Aux = 0, Zero = 1, OF = 0)
+           xor  ax,ax   ; set the flags in a known state (Carry = 0, Parity = Even, Aux = ?, Zero = 1, OF = 0)
            mov  eax,'Y'
            mov  di,offset sbuffer5
            mov  cx,26

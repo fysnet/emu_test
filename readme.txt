@@ -193,16 +193,16 @@ test_clc   proc near
            ; like we do here.
            mov  word UNDEFINED_FLAGS,0xFFFF   ; all other flags are not affected
            
-           xor  ax,ax   ; set the flags to a known state (Carry = 0, Parity = Even, Aux = 0, Zero = 1, OF = 0)
+           xor  ax,ax   ; set the flags to a known state (Carry = 0, Parity = Even, Aux = ?, Zero = 1, OF = 0)
            stc          ; set the carry (hard code it here)
            clc          ; clear it
            call std_out ; now print the results, in this case, only the FLAGS field is modified.
 
-           xor  ax,ax   ; set the flags in a known state (Carry = 0, Parity = Even, Aux = 0, Zero = 1, OF = 0)
+           xor  ax,ax   ; set the flags in a known state (Carry = 0, Parity = Even, Aux = ?, Zero = 1, OF = 0)
            stc          ; set it,
            call std_out ;  printing the results again.
 
-           xor  ax,ax   ; set the flags in a known state (Carry = 0, Parity = Even, Aux = 0, Zero = 1, OF = 0)
+           xor  ax,ax   ; set the flags in a known state (Carry = 0, Parity = Even, Aux = ?, Zero = 1, OF = 0)
            cmc          ; compliment it,
            call std_out ;  printing the results one more time.
 

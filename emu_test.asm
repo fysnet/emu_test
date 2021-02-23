@@ -43,7 +43,7 @@ comment |*******************************************************************
 *               NBASM ver 00.26.77                                         *
 *          Command line: nbasm emu_test<enter>                             *
 *                                                                          *
-* Last Updated: 19 Feb 2021                                                *
+* Last Updated: 22 Feb 2021                                                *
 *                                                                          *
 ****************************************************************************
 * Notes:                                                                   *
@@ -67,7 +67,7 @@ comment |*******************************************************************
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 ; Option 0:  floppy disk
 ; Option 1:  64k Rom
-OPTION      equ   0
+OPTION      equ   1
 
 
 ; Bochs/Windows prints a CR for every LF value it finds.
@@ -356,8 +356,10 @@ start_tests:
            call  test_bswap
 .endif
 
-           ; TODO:  call
-
+           ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+           ; call
+           call  test_call    ; (kind of ironic, but anyway)
+           
            ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
            ; cbw
            call  test_cbw
@@ -401,6 +403,10 @@ start_tests:
            call  test_mul
 
            ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+           ; iret
+           call  test_iret
+
+           ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
            ; lahf/sahf
            call  test_lahf
 
@@ -413,8 +419,11 @@ start_tests:
            call  test_loopcc
            
            ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-           ; mov
+           ; mov/movsx/movzx
            call  test_mov
+.if (HIGHEST_CPU >= 3)
+           call  test_movxx
+.endif
 
            ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
            ; neg/not
@@ -507,6 +516,8 @@ include    bts.inc
 
 include    bswap.inc
 
+include    call.inc
+
 include    cbw.inc
 include    cwd.inc
 
@@ -528,6 +539,8 @@ include    inc.inc
 include    div.inc
 include    idiv.inc
 
+include    iret.inc
+
 include    imul.inc
 include    mul.inc
 
@@ -538,6 +551,9 @@ include    lea.inc
 include    loopcc.inc
 
 include    mov.inc
+.if (HIGHEST_CPU >= 3)
+include    movxx.inc
+.endif
 
 include    neg.inc
 include    not.inc

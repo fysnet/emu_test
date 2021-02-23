@@ -11,7 +11,7 @@ comment |*******************************************************************
 *                 http://www.fysnet/newbasic.htm                           *
 *               NBASM ver 00.26.77                                         *
 *                                                                          *
-* Last Updated: 19 Feb 2021                                                *
+* Last Updated: 22 Feb 2021                                                *
 *                                                                          *
 *                                                                          *
 ***************************************************************************|
@@ -29,18 +29,18 @@ test_clc   proc near
 
            ; clear the registers
            call reset_all
-           mov  word UNDEFINED_FLAGS,0xFFFF   ; all other flags are not affected
+           mov  word UNDEFINED_FLAGS,(~(FLAGS_AUXILIARY))  ; shouldn't change any flags, but don't display the auxilary flag due to the XOR not clearing it
 
-           xor  ax,ax   ; set the flags in a known state (Carry = 0, Parity = Even, Aux = 0, Zero = 1, OF = 0)
+           xor  ax,ax   ; set the flags in a known state (Carry = 0, Parity = Even, Aux = ?, Zero = 1, OF = 0)
            stc
            clc
            call std_out
 
-           xor  ax,ax   ; set the flags in a known state (Carry = 0, Parity = Even, Aux = 0, Zero = 1, OF = 0)
+           xor  ax,ax   ; set the flags in a known state (Carry = 0, Parity = Even, Aux = ?, Zero = 1, OF = 0)
            stc
            call std_out
 
-           xor  ax,ax   ; set the flags in a known state (Carry = 0, Parity = Even, Aux = 0, Zero = 1, OF = 0)
+           xor  ax,ax   ; set the flags in a known state (Carry = 0, Parity = Even, Aux = ?, Zero = 1, OF = 0)
            cmc
            call std_out
 

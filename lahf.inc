@@ -11,7 +11,7 @@ comment |*******************************************************************
 *                 http://www.fysnet/newbasic.htm                           *
 *               NBASM ver 00.26.77                                         *
 *                                                                          *
-* Last Updated: 19 Feb 2021                                                *
+* Last Updated: 22 Feb 2021                                                *
 *                                                                          *
 *                                                                          *
 ***************************************************************************|
@@ -31,7 +31,7 @@ test_lahf  proc near
            call reset_all
            mov  word UNDEFINED_FLAGS,0xFFFF   ; all other flags are not affected
 
-           xor  ax,ax   ; set the flags in a known state (Carry = 0, Parity = Even, Aux = 0, Zero = 1, OF = 0)
+           xor  ax,ax   ; set the flags in a known state (Carry = 0, Parity = Even, Aux = ?, Zero = 1, OF = 0)
 
            ; the lahf should clear bits 3 & 5 before storing to ah, while setting bit 1 whether it is set in the flags register or not
            lahf           
